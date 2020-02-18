@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="490.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.Login">
+   <children>
+      <VBox prefHeight="490.0" prefWidth="238.0">
+         <children>
+            <ImageView fitHeight="119.0" fitWidth="211.0" pickOnBounds="true" preserveRatio="true" />
+            <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="189.0" text="CASE MANAGEMENT SYSTEM">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Label>
+            <Button fx:id="profile" mnemonicParsing="false" onMouseClicked="#profile" prefHeight="26.0" prefWidth="212.0" text="Profile" wrapText="true">
+               <padding>
+                  <Insets bottom="30.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="213.0" text="Home" textAlignment="CENTER">
+               <padding>
+                  <Insets bottom="30.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="213.0" text="Cases" wrapText="true">
+               <padding>
+                  <Insets bottom="30.0" />
+               </padding>
+            </Button>
+         </children></VBox>
+   </children>
+   <effect>
+      <ColorAdjust>
+         <input>
+            <Reflection />
+         </input>
+      </ColorAdjust>
+   </effect>
+
+</AnchorPane>
