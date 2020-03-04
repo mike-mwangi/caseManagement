@@ -1,5 +1,6 @@
 package login.screen;
 
+import data.DataRepository;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -14,7 +15,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
@@ -23,9 +23,8 @@ import java.sql.SQLException;
 public class Main extends Application {
 
     Stage window;
-    Stage windowForCancellation;
-    Stage windowForLogin;
-    Stage windowForRegistration;
+    private Scene scene;
+    DataRepository dataRepository = DataRepository.getInstance();
 
     public static void main(String[] args) {
         launch(args);
@@ -34,224 +33,125 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws SQLException, FileNotFoundException {
         window = primaryStage;
         window.setTitle("Login Screen");
-//        Connection conn = DriverManager.getConnection("jdbc:mysql://10.20.113.55:3306/120138_cms");
 
-        FileInputStream inputStream = new FileInputStream("/home/mike/Downloads/App background1.jpg");
+        FileInputStream inputStream = new FileInputStream("/home/mike/Downloads/justice9.jpg");
         BackgroundImage backgroundImage = new BackgroundImage(new Image(inputStream), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background background = new Background(backgroundImage);
 
-       /*Image image = new Image ("file: App backgound.jpg");
-       ImageView imageView = new ImageView (image);
-       imageView.setImage(image);
-
-       Group root = new Group();
-       root.getChildren().addAll(imageView);*/
-        //Scene scene1 = new Scene (root, 500,500);
-        //Image image1= new Image (getClass().getResource("App backgroung.jpg").toString());
-        //BackgroundImage backgroundImage = new BackgroundImage (image1, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-        //Background background = new Background (backgroundImage);
 
 
 
         GridPane grid = new GridPane();
-        Scene scene = new Scene(grid, 700, 600);
+        scene = new Scene(grid, 1024, 768);
         grid.setBackground(background);
         grid.setAlignment(Pos.CENTER);
         grid.setVgap(10);
         grid.setHgap(10);
         grid.setPadding(new Insets(10));
-        // grid.setBackground(background);
-        //ImagePattern pattern = new ImagePattern(image);
-        //scene.setFill(pattern);
-        //grid.getChildren().addAll(imageView);
 
-        Text welcomeTxt = new Text("Welcome");
+        Text welcomeTxt = new Text("CASE MANAGEMENT SYSTEM");
         welcomeTxt.setFont(Font.font("Pixel", FontWeight.LIGHT.BOLD, 25));
 
 
         grid.add(welcomeTxt, 0, 0);
         Label choiceBox = new Label("Choose User:");
         choiceBox.setFont(Font.font("Pixel", FontWeight.LIGHT.BOLD, 16));
-        choiceBox.setTextFill(Color.web("#ff0000"));
-
+        choiceBox.setTextFill(Color.web("#000000"));
         grid.add(choiceBox, 0, 1);
-        ChoiceBox userLabel = new ChoiceBox();
 
+        ChoiceBox userLabel = new ChoiceBox();
         grid.add(userLabel, 0, 2);
         TextField userTxt = new TextField();
-//        Button individual=new Button();
         userLabel.setItems(FXCollections.observableArrayList(
-                "Individual", "Police", "Judge","Lawyer"));
-        userTxt.setPromptText("User");
-
-
+                "Individual", "Police", "Judge","Lawyer","Company"));
+        userTxt.setPromptText("User ID");
         grid.add(userTxt, 1, 2);
 
 
-        Label passwordLabel = new Label("Password");
+        Label passwordLabel = new Label("Password:");
         passwordLabel.setFont(Font.font("Pixel", FontWeight.BOLD, 16));
-        passwordLabel.setTextFill(Color.web("#ff0000"));
+        passwordLabel.setTextFill(Color.web("#000000"));
 
         grid.add(passwordLabel, 0, 3);
         PasswordField passwordBox = new PasswordField();
         passwordBox.setPromptText("Password");
         grid.add(passwordBox, 1, 3);
 
-        Button loginBtn = new Button("Login");
+
+
+            Button loginBtn = new Button("Login");
         loginBtn.setFont(Font.font("Pixel", FontWeight.LIGHT.BOLD, 12));
-        loginBtn.setTextFill(Color.web("#ff0000"));
+        loginBtn.setTextFill(Color.web("#000000"));
 
         grid.add(loginBtn, 1, 4);
+
         loginBtn.setOnAction((ActionEvent e) -> {
             String selectedView = userLabel.getValue().toString().toUpperCase();
-            showView(AppViews.valueOf(selectedView), userTxt.getText());
+            try {
+                showView(AppViews.valueOf(selectedView), userTxt.getText(), passwordBox.getText());
 
+
+
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            }
 
         });
-////        Button cancelBtn = new Button("cancel");
-////        grid.add(cancelBtn, 1, 5);
-////        cancelBtn.setOnAction(e ->{
-////            windowForCancellation = primaryStage;
-////            windowForCancellation.setTitle(" Cancellation Screen");
-////            GridPane gridForCancellation = new GridPane();
-////            gridForCancellation.setAlignment(Pos.CENTER);
-////            gridForCancellation.setVgap(10);
-////            gridForCancellation.setHgap(10);
-////            gridForCancellation.setPadding(new Insets(10));
-////
-////            Label cancelTxt = new Label("Sorry to see you leave"+ "😢");
-////            cancelTxt.setFont(Font.font("Pixel", FontWeight.LIGHT.BOLD, 25));
-////            gridForCancellation.add(cancelTxt, 0, 0);
-//
-//            Button back = new Button ("Back");
-//            gridForCancellation.add(back, 0, 1);
-//            back.setOnAction(ex -> window.setScene(scene));
-//
-//            Scene cancelScene = new Scene(gridForCancellation, 500, 500);
-//            window.setScene(cancelScene);
-//            window.show();
-//        });
-
-//        Button registerBtn = new Button ("Sign up");
-//        grid.add(registerBtn, 1, 5);
-//        Label signUp = new Label ("No account? Create one!");
-//        grid.add(signUp, 1, 4);
-//
-//        registerBtn.setOnAction(e -> {
-//            windowForRegistration = primaryStage;
-//            windowForRegistration.setTitle("Registration Screen");
-//
-//
-//            GridPane gridForRegistration = new GridPane();
-//            gridForRegistration.setAlignment(Pos.CENTER);
-//            gridForRegistration.setVgap(10);
-//            gridForRegistration.setHgap(10);
-//            gridForRegistration.setPadding(new Insets(10));
-//
-//            Label firstNameLabel = new Label("First Name");
-//            gridForRegistration.add(firstNameLabel, 0, 1);
-//            TextField firstNameTxt = new TextField();
-//            firstNameTxt.setPromptText("First name");
-//            gridForRegistration.add(firstNameTxt, 1, 1);
-//
-//            Label lastNameLabel = new Label("Last Name");
-//            gridForRegistration.add(lastNameLabel, 0, 2);
-//            TextField lastNameTxt = new TextField();
-//            lastNameTxt.setPromptText("last name");
-//            gridForRegistration.add(lastNameTxt, 1, 2);
-//
-//            Label userNameLabel = new Label("Username");
-//            gridForRegistration.add(userNameLabel, 0, 3);
-//            TextField userNameTxt = new TextField();
-//            userNameTxt.setPromptText("username");
-//            gridForRegistration.add(userNameTxt, 1, 3);
-//
-//            Label emailLabel = new Label("Email");
-//            gridForRegistration.add(emailLabel, 0, 4);
-//            TextField emailTxt = new TextField();
-//            emailTxt.setPromptText("Email");
-//            gridForRegistration.add(emailTxt, 1, 4);
-//
-//            Label userPasswordLabel = new Label("Password");
-//            gridForRegistration.add(userPasswordLabel, 0, 5);
-//            PasswordField passwrdBox = new PasswordField();
-//            passwrdBox.setPromptText("Password");
-//            gridForRegistration.add(passwrdBox, 1, 5);
-//
-//            Button signUpBtn = new Button ("sign up");
-//            gridForRegistration.add(signUpBtn, 1, 7);
-//            signUpBtn.setOnAction(E -> window.setScene(scene));
-//
-//            Scene registerScene = new Scene(gridForRegistration, 700, 600);
-//            window.setScene(registerScene);
-//            window.show();
-//        });
-
-
-
-//        String url="jdbc:mysql://sql2.freemysqlhosting.net:3306/sql2322920";
-//        String user="sql2322920";
-//        String password="rL7%mG3%?";
-//        try {
-//            Connection myConn = DriverManager.getConnection(url,user,password);
-//            Statement myStm = myConn.createStatement();
-//            String sql = "select * from cases";
-//            ResultSet rs = myStm.executeQuery(sql);
-//
-//            while (rs.next()) {
-//                System.out.println(rs.getString("CaseID"));
-//            }
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-
-
-
-//        ResultSet cases = DataRepository.getInstance().getCases();
-//        while(cases.next()) {
-//            System.out.println(cases.getString("caseID"));
-//        }
-//        ResultSet court = DataRepository.getInstance().getCourt();
-//        while(court.next()) {
-//            System.out.println(court.getString("courtID"));
-//        }
-//
-//
-//        ResultSet advocates = DataRepository.getInstance().getAdvocates();
-//        while(advocates.next()) {
-//            System.out.println(advocates.getString("advocateFName"));
-//        }
-//
-//        ResultSet ID = DataRepository.getInstance().getIndividualById();
-//        while(ID.next()) {
-//            System.out.println(advocates.getString("individualID"));
-//        }
-
-
-
-
 
         window.setResizable(false);
+
         window.setScene(scene);
         window.show();
     }
 
 
-    private void showView(AppViews view, String extra) {
+    private void showView(AppViews view, String username, String password) throws FileNotFoundException {
         switch (view) {
             case INDIVIDUAL:
-                new IndividualView();
+                System.out.println(dataRepository.validateIndividual(username, password));
+                if(dataRepository.validateIndividual(username, password)) {
+                    new IndividualView(username,scene);
+                    window.close();
+
+                }
                 break;
+
             case JUDGE:
-                new JudgeView(extra);
+                System.out.println(dataRepository.validateJudge(username, password));
+                if(dataRepository.validateJudge(username, password)) {
+                    new JudgeView(username,scene);
+                    window.close();
+
+                }
+
                 break;
+
             case POLICE:
-                    new PoliceView(extra);
+                System.out.println(dataRepository.validatePolice(username, password));
+                if(dataRepository.validatePolice(username, password)) {
+                    new PoliceView(username,scene);
+                 window.close();
+
+                }
                     break;
+
+            case COMPANY:
+                System.out.println(dataRepository.validateCompany(username, password));
+                if(dataRepository.validateCompany(username, password)) {
+                    new CompanyView(username,scene);
+                    window.close();
+
+                }
+                break;
+
             case LAWYER:
-                new LawyerView();
+                System.out.println(dataRepository.validateLawyer(username, password));
+                if(dataRepository.validateLawyer(username, password)) {
+                    new LawyerView(username,scene);
+                    window.close();
+
+
+                }
                 break;
         }
 

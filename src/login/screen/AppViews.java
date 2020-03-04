@@ -4,5 +4,6 @@ public enum AppViews {
     INDIVIDUAL,
     POLICE,
     JUDGE,
-    LAWYER
+    LAWYER,
+    COMPANY
 }

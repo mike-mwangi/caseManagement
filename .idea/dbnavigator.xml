@@ -25,8 +25,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="764112f8-abf3-4813-ab28-809cf9af4c58">
-        <schema name="information_schema" object-types="view, table" />
-        <schema name="sql2322920" object-types="view, table" />
+        <schema name="sql2322920" object-types="function, procedure, constraint, dataset trigger, table, view, column, index" />
       </connection>
     </loaded-nodes>
   </component>
@@ -35,7 +34,7 @@
       <console name="casemanagement AWS" type="STANDARD" schema="case_management" session="Main">SELECT * FROM advocate;</console>
     </connection>
     <connection id="764112f8-abf3-4813-ab28-809cf9af4c58">
-      <console name=" sql2322920" type="STANDARD" schema="sql2322920" session="Main"><![CDATA[select * from cases]]></console>
+      <console name=" sql2322920" type="STANDARD" schema="sql2322920" session="Main">select * from cases</console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -46,6 +45,7 @@
     <connection id="764112f8-abf3-4813-ab28-809cf9af4c58" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="764112f8-abf3-4813-ab28-809cf9af4c58" dataset="sql2322920.officer" active-filter-id="" />
     <filter-actions connection-id="764112f8-abf3-4813-ab28-809cf9af4c58" dataset="sql2322920.advocate" active-filter-id="" />
     <filter-actions connection-id="764112f8-abf3-4813-ab28-809cf9af4c58" dataset="sql2322920.judge" active-filter-id="4a67759a-b013-4a36-bf27-eddb079a5c11">
       <filter id="4a67759a-b013-4a36-bf27-eddb079a5c11" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">

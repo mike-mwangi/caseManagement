@@ -1,4 +1,5 @@
 package login.screen;
+
 import data.DataRepository;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,7 +15,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.Individual;
 
-import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
@@ -22,52 +22,46 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
-public class IndividualView extends Stage {
+public class CompanyView extends Stage {
 
     Stage windowForProfile;
     Stage windowForCases;
-
-    GridPane gridInd = new GridPane();
-
-    private String individualId;
+    GridPane gridCompany = new GridPane();
+    private String companyId;
 
 
-    public IndividualView(String individualId,Scene myScene) throws FileNotFoundException {
-        this.individualId=individualId;
-
-        this.setTitle("INDIVIDUAL DASHBOARD");
+    public CompanyView(String companyId,Scene myScene) throws FileNotFoundException{
+        this.companyId = companyId;
+        this.setTitle("COMPANY DASHBOARD");
 
 
 
-        Scene scene = new Scene(gridInd, 1024, 768);
-        gridInd.setAlignment(Pos.CENTER);
-        gridInd.setVgap(10);
-        gridInd.setHgap(10);
-        gridInd.setPadding(new Insets(10));
+        Scene scene = new Scene(gridCompany, 1024, 768);
+
+
+        gridCompany.setAlignment(Pos.CENTER);
+        gridCompany.setVgap(10);
+        gridCompany.setHgap(10);
+        gridCompany.setPadding(new Insets(10));
+
+
         Text welcomeTxt = new Text("Welcome");
         welcomeTxt.setFont(Font.font("Pixel", FontWeight.LIGHT.BOLD, 25));
-        gridInd.add(welcomeTxt, 0, 0);
-
+        gridCompany.add(welcomeTxt, 0, 0);
         FileInputStream inputStream = new FileInputStream("/home/mike/Downloads/justice9.jpg");
         BackgroundImage backgroundImage = new BackgroundImage(new Image(inputStream), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background background = new Background(backgroundImage);
-        gridInd.setBackground(background);
-
+        gridCompany.setBackground(background);
 
         Button Profile = new Button("Profile");
-        gridInd.add(Profile, 0, 1);
-        Profile.setOnAction(e -> {
-
+        gridCompany.add(Profile, 0, 1);
+        Profile.setOnAction(e ->{
             ResultSet profile;
             try {
-                profile = DataRepository.getInstance().getIndividualProfile(individualId);
+                profile = DataRepository.getInstance().getCompanyProfile(companyId);
                 while(profile.next()) {
                     System.out.println();
-
-
-                    windowForProfile = this;
-                    windowForProfile.setTitle("My Profile");
+                    this.setTitle("My Profile");
                     GridPane gridForProfile = new GridPane();
                     gridForProfile.setAlignment(Pos.CENTER);
                     gridForProfile.setVgap(10);
@@ -75,37 +69,32 @@ public class IndividualView extends Stage {
                     gridForProfile.setPadding(new Insets(10));
                     gridForProfile.setBackground(background);
 
+                    windowForProfile = this;
+                    windowForProfile.setTitle("My Profile");
 
 
-                    Label firstNameLabel = new Label("First Name:");
-                    gridForProfile.add(firstNameLabel, 0, 1);
-                    Label firstNameTxt = new Label();
-                    firstNameTxt.setText(profile.getString("individualFName"));
-                    gridForProfile.add(firstNameTxt, 1, 1);
+                    Label companyNameLabel = new Label("Company Name:");
+                    gridForProfile.add(companyNameLabel, 0, 1);
+                    Label companyNameTxt = new Label();
+                    companyNameTxt.setText(profile.getString("companyName"));
+                    gridForProfile.add(companyNameTxt, 1, 1);
+
+                    Label addressLabel = new Label("Company Address:");
+                    gridForProfile.add(addressLabel, 0, 2);
+                    Label addressTxt = new Label();
+                    addressTxt.setText(profile.getString("companyAddress"));
+                    gridForProfile.add(addressTxt, 1, 2);
 
 
-                    Label lastNameLabel = new Label("Last Name:");
-                    gridForProfile.add(lastNameLabel, 0, 2);
-                    Label lastNameTxt = new Label();
-                    lastNameTxt.setText(profile.getString("individualLName"));
-                    gridForProfile.add(lastNameTxt, 1, 2);
-
-
-                    Label userAge = new Label("Age:");
-                    gridForProfile.add(userAge, 0, 4);
-                    Label userAgeTxt = new Label();
-                    userAgeTxt.setText(profile.getString("individualAge"));
-                    gridForProfile.add(userAgeTxt, 1, 4);
-
-                    Label userGender = new Label("Gender:");
-                    gridForProfile.add(userGender, 0, 3);
-                    Label userGenderTxt = new Label();
-                    userGenderTxt.setText(profile.getString("individualGender"));
-                    gridForProfile.add(userGenderTxt, 1, 3);
+                    Label companyContactLabel = new Label("Company Contact:");
+                    gridForProfile.add(companyContactLabel, 0, 3);
+                    Label companyContactTxt = new Label();
+                    companyContactTxt.setText(profile.getString("companyContact"));
+                    gridForProfile.add(companyContactTxt, 1, 3);
 
 
                     Button back = new Button("Back");
-                    gridForProfile.add(back, 0, 5);
+                    gridForProfile.add(back, 0, 4);
                     back.setOnAction(ex -> this.setScene(scene));
 
 
@@ -113,6 +102,7 @@ public class IndividualView extends Stage {
                     this.setScene(ProfileScene);
                     this.show();
                 }
+
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
@@ -121,13 +111,13 @@ public class IndividualView extends Stage {
 
 
         Button Cases = new Button("Cases");
-        gridInd.add(Cases, 0, 2);
+        gridCompany.add(Cases, 0, 2);
 
         Cases.setOnAction( e -> {
 
             ResultSet cases;
             try {
-                cases = DataRepository.getInstance().getIndividualCases(individualId);
+                cases = DataRepository.getInstance().getCompanyCases(companyId);
                 while (cases.next()) {
                     System.out.println();
 
@@ -255,7 +245,7 @@ public class IndividualView extends Stage {
 
 
         Button changePassword = new Button("Change Password");
-        gridInd.add(changePassword, 0, 3);
+        gridCompany.add(changePassword, 0, 3);
         changePassword.setOnAction(e -> {
 
             this.setTitle("Change Password");
@@ -267,34 +257,29 @@ public class IndividualView extends Stage {
             gridForPassword.setBackground(background);
 
 
-            Label judgeIdLabel = new Label("Individual ID:");
-            gridForPassword.add(judgeIdLabel, 0, 1);
-            TextField judgeIdTxt = new TextField();
-            gridForPassword.add(judgeIdTxt, 1, 1);
+            Label companyIdLabel = new Label("Company ID:");
+            gridForPassword.add(companyIdLabel, 0, 1);
+            TextField companyIdTxt = new TextField();
+            gridForPassword.add(companyIdTxt, 1, 1);
 
 
-            Label IndFNameLabel = new Label("Individual First Name:");
-            gridForPassword.add(IndFNameLabel, 0, 2);
-            TextField indFNameTxt = new TextField();
-            gridForPassword.add(indFNameTxt, 1, 2);
+            Label companyNameLabel = new Label("Company Name:");
+            gridForPassword.add(companyNameLabel, 0, 2);
+            TextField companyNameTxt = new TextField();
+            gridForPassword.add(companyNameTxt, 1, 2);
 
 
-            Label indLNameLabel = new Label("Individual Last Name:");
-            gridForPassword.add(indLNameLabel, 0, 3);
-            TextField indLNameTxt = new TextField();
-            gridForPassword.add(indLNameTxt, 1, 3);
-
-            Label indAgeLabel = new Label("Individual Age:");
-            gridForPassword.add(indAgeLabel, 0, 4);
-            TextField indAgeTxt = new TextField();
-            gridForPassword.add(indAgeTxt, 1, 4);
+            Label addressLabel = new Label("Company Address:");
+            gridForPassword.add(addressLabel, 0, 4);
+            TextField addressTxt = new TextField();
+            gridForPassword.add(addressTxt, 1, 4);
 
 
 
-            Label indGenderLabel = new Label("Individual Gender:");
-            gridForPassword.add(indGenderLabel, 0, 5);
-            TextField indGenderTxt = new TextField();
-            gridForPassword.add(indGenderTxt, 1, 5);
+            Label contactsLabel = new Label("Company Contacts:");
+            gridForPassword.add(contactsLabel, 0, 5);
+            TextField contactsTxt = new TextField();
+            gridForPassword.add(contactsTxt, 1, 5);
 
             Label newPasswordLabel = new Label("New Password:");
             gridForPassword.add(newPasswordLabel, 0, 6);
@@ -315,28 +300,25 @@ public class IndividualView extends Stage {
                     DataRepository.getInstance().individualChangePassword();
                     Connection connection = DataRepository.getInstance().dbConnection;
 
-                    String myIndividualID = judgeIdTxt.getText();
-                    String individualFName = indFNameTxt.getText();
-                    String individualLName = indLNameTxt.getText();
-                    String indAge = indAgeTxt.getText();
-                    String indGender = indGenderTxt.getText();
+                    String myCompanyID = companyIdTxt.getText();
+                    String companyName = companyNameTxt.getText();
+                    String address = addressTxt.getText();
+                    String contacts = contactsTxt.getText();
                     String password = newPasswordTxt.getText();
 
 
                     Individual passwordChange = new Individual();
-                    passwordChange.setIndividualID(myIndividualID);
-                    passwordChange.setIndividualFName(individualFName);
-                    passwordChange.setIndividualLName(individualLName);
-                    passwordChange.setIndividualAge(indAge);
-                    passwordChange.setIndividualGender(indGender);
+                    passwordChange.setIndividualID(myCompanyID);
+                    passwordChange.setIndividualFName(companyName);
+                    passwordChange.setIndividualAge(address);
+                    passwordChange.setIndividualGender(contacts);
                     passwordChange.setPassword(password);
 
 
                     String sql = ("INSERT INTO individual (individualID,individualFName,individualLName,individualAge," +
-                            "individualGender,password) VALUES ('"+ myIndividualID+"','" +individualFName+"','"
-                            +individualLName +"','"+ indAge +"','"+ indGender+"','"+password + "')");
-                            Statement statement = connection.createStatement();
-                            statement.executeUpdate(sql);
+                            "individualGender,password) VALUES ('"+ myCompanyID+"','" +companyName+"','"+ address +"','"+ contacts+"','"+password + "')");
+                    Statement statement = connection.createStatement();
+                    statement.executeUpdate(sql);
 
 
                 } catch (SQLException exc) {
@@ -355,7 +337,6 @@ public class IndividualView extends Stage {
 
 
         this.setScene(scene);
-        //gridForLogin.getChildren().addAll(loginTxt);
         this.show();
         logout(myScene);
 
@@ -364,13 +345,9 @@ public class IndividualView extends Stage {
     {
 
         Button logOut= new Button("Log out");
-        gridInd.add(logOut, 0, 5);
+        gridCompany.add(logOut, 0, 5);
         logOut.setOnAction(ex -> this.setScene(scene));
-
 
     }
 
 }
-
-
-
