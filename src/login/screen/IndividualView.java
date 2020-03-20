@@ -1,4 +1,5 @@
 package login.screen;
+
 import data.DataRepository;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,8 +14,6 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.Individual;
-
-import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
@@ -37,7 +36,6 @@ public class IndividualView extends Stage {
         this.individualId=individualId;
 
         this.setTitle("INDIVIDUAL DASHBOARD");
-
 
 
         Scene scene = new Scene(gridInd, 1024, 768);

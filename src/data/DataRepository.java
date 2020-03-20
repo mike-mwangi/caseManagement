@@ -27,10 +27,17 @@ public class DataRepository {
 
     private void initializeConnection() {
         try {
-            String url = "jdbc:mysql://remotemysql.com:3306/utNwEmfi1A";
+//            String url = "jdbc:mysql://remotemysql.com:3306/utNwEmfi1A";
+//            Properties info = new Properties();
+//            info.put("user", "utNwEmfi1A");
+//            info.put("password", "0SQLl7fKZP");
+            String url = "jdbc:mysql://casemanagement.c5d1idhilh15.us-east-2.rds.amazonaws.com:3306/casemanagement";
             Properties info = new Properties();
-            info.put("user", "utNwEmfi1A");
-            info.put("password", "0SQLl7fKZP");
+            info.put("user", "120138");
+            info.put("password", "120138120138");
+
+
+
 
             dbConnection = DriverManager.getConnection(url, info);
 
@@ -366,7 +373,6 @@ public class DataRepository {
 
 
 
-
     public boolean validateIndividual(String username, String password) {
         ResultSet resultSet = null;
         try {
@@ -442,7 +448,6 @@ public class DataRepository {
             // SELECT from judge where id=username
             resultSet = statement.executeQuery("SELECT * FROM company WHERE companyID='" + username + "'");
 
-            // Assert 1 row returned
             count = 0;
             if(resultSet.last()){
                 count = resultSet.getRow();

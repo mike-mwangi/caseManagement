@@ -7,5 +7,11 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://remotemysql.com:3306/utNwEmfi1A</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="case_management" uuid="1f0eecc0-823e-4373-bae2-016c0b6ced12">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://casemanagement.c5d1idhilh15.us-east-2.rds.amazonaws.com:3306/casemanagement</jdbc-url>
+    </data-source>
   </component>
 </project>

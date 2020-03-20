@@ -23,18 +23,14 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="764112f8-abf3-4813-ab28-809cf9af4c58">
-        <schema name="sql2322920" object-types="function, procedure, constraint, dataset trigger, table, view, column, index" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="002d4414-05f9-47e1-920a-5874740e7108">
-      <console name="casemanagement AWS" type="STANDARD" schema="case_management" session="Main">SELECT * FROM advocate;</console>
+      <console name="casemanagement AWS" type="STANDARD" schema="case_management" session="Main"><![CDATA[SELECT * FROM advocate;]]></console>
     </connection>
     <connection id="764112f8-abf3-4813-ab28-809cf9af4c58">
-      <console name=" sql2322920" type="STANDARD" schema="sql2322920" session="Main">select * from cases</console>
+      <console name=" sql2322920" type="STANDARD" schema="sql2322920" session="Main"><![CDATA[select * from cases]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

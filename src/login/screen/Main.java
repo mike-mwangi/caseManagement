@@ -90,8 +90,6 @@ public class Main extends Application {
             try {
                 showView(AppViews.valueOf(selectedView), userTxt.getText(), passwordBox.getText());
 
-
-
             } catch (FileNotFoundException ex) {
                 ex.printStackTrace();
             }
