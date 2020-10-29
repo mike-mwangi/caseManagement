@@ -17,7 +17,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.sql.SQLException;
 
 
 public class Main extends Application {
@@ -30,7 +29,7 @@ public class Main extends Application {
         launch(args);
     }
     @Override
-    public void start(Stage primaryStage) throws SQLException, FileNotFoundException {
+    public void start(Stage primaryStage) throws FileNotFoundException {
         window = primaryStage;
         window.setTitle("Login Screen");
 

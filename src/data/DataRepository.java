@@ -27,15 +27,15 @@ public class DataRepository {
 
     private void initializeConnection() {
         try {
-//            String url = "jdbc:mysql://remotemysql.com:3306/utNwEmfi1A";
-//            Properties info = new Properties();
-//            info.put("user", "utNwEmfi1A");
-//            info.put("password", "0SQLl7fKZP");
-            String url = "jdbc:mysql://casemanagement.c5d1idhilh15.us-east-2.rds.amazonaws.com:3306/casemanagement";
+            String url = "jdbc:mysql://sql2.freemysqlhosting.net:3306/sql2328824";
             Properties info = new Properties();
-            info.put("user", "120138");
-            info.put("password", "120138120138");
-
+            info.put("user", "sql2328824");
+            info.put("password", "rT6%pN6%");
+//            String url = "jdbc:mysql://casemanagement.c5d1idhilh15.us-east-2.rds.amazonaws.com:3306/casemanagement";
+//            Properties info = new Properties();
+//            info.put("user", "admin");
+//            info.put("password", "120138120138");
+//
 
 
 
